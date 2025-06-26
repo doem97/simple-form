@@ -7,11 +7,20 @@
 - **示例网站**: [booking.distribrain.com](https://booking.distribrain.com)
 - **示例后台**: [booking.distribrain.com/admin](https://booking.distribrain.com/admin) (密码: `admin`)
 
-<p align="center">
-  <img alt="预定系统截图" src="https://via.placeholder.com/800x600.png?text=Booking+System+UI" width="48%">
-  &nbsp;&nbsp;
-  <img alt="后台系统截图" src="https://via.placeholder.com/800x600.png?text=Admin+Panel+UI" width="48%">
-</p>
+<table>
+  <tbody>
+    <tr>
+      <td width="50%" valign="top">
+        <img alt="预定系统截图" src="https://github.com/user-attachments/assets/5c1a0d03-bee6-4f09-bcad-c7276d23d5ee" width="100%">
+      </td>
+      <td width="50%" valign="top">
+        <img alt="预定成功" src="https://github.com/user-attachments/assets/7ed37f97-21c1-402f-8152-697c1712cee4" width="100%"><br>
+        <img alt="登录后台" src="https://github.com/user-attachments/assets/60f6b7d2-894a-4425-b8c4-7d4b3a0b5f11" width="100%"><br>
+        <img alt="后台系统" src="https://github.com/user-attachments/assets/bca12968-a8f2-43a1-8705-520da2de4882" width="100%">
+      </td>
+    </tr>
+  </tbody>
+</table>
 <br/>
 
 ## 🚀 推荐流程：一键部署到 Vercel
