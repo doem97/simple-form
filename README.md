@@ -11,16 +11,24 @@
 </a>
 
 1.  **点击上方黑色的 "Deploy with Vercel" 按钮**。
-2.  **连接 Git 提供商**：Vercel 会提示您创建一个新的 Git 仓库 (例如在您的 GitHub 账户下)。项目代码会被克隆到这个新仓库中。
-3.  **配置集成 (关键步骤)**:
-    - 在 "Configure Project" 页面，Vercel 会自动检测到这是一个 Next.js 项目。
-    - 最关键的一步是连接数据库。选择 **"Integrations"**，然后从 Vercel Marketplace 中搜索并添加 **"Upstash Redis"**。
-    - 按照指引选择或创建一个新的 Redis 数据库。Vercel 将自动为您设置 `UPSTASH_REDIS_REST_URL` 和 `UPSTASH_REDIS_REST_TOKEN` 环境变量。
-    - 接下来，展开 **"Environment Variables"** 部分，手动添加 `NEXTAUTH_SECRET`。
+2.  **连接 Git 提供商**：Vercel 会提示您创建一个新的 Git 仓库，项目代码会被克隆到这个新仓库中。
+3.  **连接数据库 (关键！)**
+    - **注意**: 此时的部署会因为没有连接数据库而 **失败**。这是预期行为。
+    - 部署失败后，在项目页面点击 **"Go to Project"**，然后选择顶部的 **"Storage"** 标签页。
+    - 点击 **"Create Database"**，然后选择 **"Upstash" (Redis)**。
+    - 按照指引创建并连接数据库。
+3.  **配置并部署**:
+    - 展开 **"Environment Variables"** 部分，手动添加以下变量：
       - `NEXTAUTH_SECRET`: 这是一个用于保护会话安全的密钥。您可以通过在本地终端运行 `openssl rand -hex 32` 生成一个随机字符串，然后粘贴到这里。
-4.  **部署**：点击 "Deploy"。Vercel 会开始构建和部署您的应用。
+      - `ADMIN_PASSWORD`: 为您的后台管理页面设置一个访问密码。
+    - 设置完成后，回到项目的 "Deployments" 标签页。
+    - 找到刚才失败的部署，点击其右侧的 "..." 菜单，选择 **"Redeploy"**。
+    - 部署成功后，您的应用就可以正常访问了！
+      - **表单地址**: `your-app-name.vercel.app` (或您的自定义域名)
+      - **管理后台**: `your-app-name.vercel.app/admin` (使用您设置的 `ADMIN_PASSWORD` 登录)
 
-> **关于 `NEXTAUTH_URL`**: Vercel 会自动为您的部署分配一个 URL，并将其设置为 `VERCEL_URL` 环境变量。`next-auth` 会自动使用这个变量，所以您**无需**在 Vercel 上手动设置 `NEXTAUTH_URL`。
+6.  **(可选) 绑定自定义域名**
+    - 在项目 "Settings" -> "Domains" 中，您可以将自己的域名绑定到此项目。
 
 ### 第 2 步：在本地运行
 
