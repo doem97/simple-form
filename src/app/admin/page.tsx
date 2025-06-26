@@ -5,6 +5,7 @@ import { useSession, signOut } from 'next-auth/react';
 import Login from './Login'; // The login component we just created
 
 interface BookingDetails {
+    id: string;
     name: string;
     email: string;
     company?: string;
@@ -36,7 +37,7 @@ function AdminDashboard() {
         fetchBookings();
     }, []);
 
-    const handleDelete = async (timeSlot: string) => {
+    const handleDelete = async (bookingId: string, timeSlot: string) => {
         if (!confirm(`确定要删除 ${timeSlot} 这个时间段的预订吗?`)) {
             return;
         }
@@ -45,7 +46,7 @@ function AdminDashboard() {
             const response = await fetch('/api/bookings', {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ timeSlot }),
+                body: JSON.stringify({ id: bookingId }),
             });
 
             if (!response.ok) {
@@ -84,7 +85,7 @@ function AdminDashboard() {
                         <ul role="list" className="divide-y divide-gray-200">
                             {bookings.length > 0 ? (
                                 bookings.map((booking) => (
-                                    <li key={booking.timeSlot} className="px-4 py-4 sm:px-6 flex items-center justify-between hover:bg-gray-50">
+                                    <li key={booking.id} className="px-4 py-4 sm:px-6 flex items-center justify-between hover:bg-gray-50">
                                         <div className="min-w-0">
                                             <p className="text-sm font-semibold text-primary">{booking.timeSlot}</p>
                                             <p className="mt-1 text-sm text-gray-800 truncate">{`姓名: ${booking.name}`}</p>
@@ -92,7 +93,7 @@ function AdminDashboard() {
                                             {booking.company && <p className="mt-1 text-sm text-gray-500 truncate">{`公司: ${booking.company}`}</p>}
                                         </div>
                                         <button
-                                            onClick={() => handleDelete(booking.timeSlot)}
+                                            onClick={() => handleDelete(booking.id, booking.timeSlot)}
                                             className="ml-4 px-3 py-1.5 text-sm font-medium text-red-600 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors">
                                             删除
                                         </button>

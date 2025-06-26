@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 // --- Data Types ---
 interface BookingDetails {
+  id: string;
   name: string;
   email: string;
   company?: string;
@@ -37,15 +38,29 @@ export default function Home() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [newBookingId, setNewBookingId] = useState<string | null>(null);
 
   // --- Effects ---
   useEffect(() => {
     fetch('/api/bookings')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch bookings');
+        }
+        return res.json();
+      })
       .then((data: BookingDetails[]) => {
-        // We now receive an array of objects, so we need to extract the timeSlot string
-        const slots = data.map(booking => booking.timeSlot);
-        setBookedSlots(slots);
+        if (Array.isArray(data)) {
+          // We now receive an array of objects, so we need to extract the timeSlot string
+          const slots = data.map(booking => booking.timeSlot);
+          setBookedSlots(slots);
+        } else {
+          console.error("Received data is not an array:", data);
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching bookings:", error);
+        // You could set an error state here to show a message to the user
       });
   }, []);
 
@@ -69,6 +84,7 @@ export default function Home() {
     e.preventDefault();
     setMessage('');
     setError('');
+    setNewBookingId(null);
     if (!name || !email || !selectedSlot) {
       setError('请完整填写信息并选择一个时间段。');
       return;
@@ -82,6 +98,7 @@ export default function Home() {
     const result = await response.json();
     setIsLoading(false);
     if (response.ok) {
+      setNewBookingId(result.id);
       setMessage('预订成功！我们期待与您见面。');
       setBookedSlots([...bookedSlots, selectedSlot]);
       setSelectedSlot(null);
@@ -174,7 +191,25 @@ export default function Home() {
             {/* --- Messages & Submit --- */}
             <div className="pt-6 border-t border-gray-200">
               {error && <p className="text-red-700 bg-red-100 border border-red-200 p-3 rounded-md text-center text-sm mb-4">{error}</p>}
-              {message && <p className="text-green-700 bg-green-100 border border-green-200 p-3 rounded-md text-center text-sm mb-4">{message}</p>}
+
+              {message && !newBookingId && <p className="text-green-700 bg-green-100 border border-green-200 p-3 rounded-md text-center text-sm mb-4">{message}</p>}
+
+              {newBookingId && (
+                <div className="text-green-800 bg-green-50 border border-green-200 p-4 rounded-lg text-center text-sm mb-4 space-y-2">
+                  <p className="font-semibold">预订成功！我们期待与您见面。</p>
+                  <p>您可以通过以下链接修改您的预订信息：</p>
+                  <a
+                    href={`/edit-booking/${newBookingId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono bg-green-100 p-2 rounded-md block break-words text-indigo-600 hover:underline"
+                  >
+                    {typeof window !== 'undefined' && `${window.location.origin}/edit-booking/${newBookingId}`}
+                  </a>
+                  <p className="text-xs text-gray-600 pt-2">我们稍后会将此链接发送到您的邮箱，请注意查收。</p>
+                </div>
+              )}
+
               <button type="submit" disabled={isLoading || !selectedSlot}
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 disabled:bg-indigo-400 disabled:cursor-not-allowed flex items-center justify-center text-base shadow-lg hover:shadow-indigo-500/40 disabled:shadow-none">
                 {isLoading && <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>}
