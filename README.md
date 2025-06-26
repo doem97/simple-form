@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 简单小表格
 
-## Getting Started
+这是一个使用 Next.js, TypeScript, 和 Tailwind CSS 构建的简单客户信息收集和时间段预订应用。
 
-First, run the development server:
+## 如何在本地运行
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1.  **进入项目目录**:
+    ```bash
+    cd client
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2.  **安装依赖**:
+    如果您还没有安装依赖，请运行：
+    ```bash
+    npm install
+    ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3.  **启动开发服务器**:
+    ```bash
+    npm run dev
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4.  **在浏览器中打开**:
+    打开您的浏览器并访问 [http://localhost:3000](http://localhost:3000) 即可看到正在运行的应用。
 
-## Learn More
+## 如何部署到 Vercel
 
-To learn more about Next.js, take a look at the following resources:
+将此应用部署到 Vercel 非常简单。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  **将代码推送到 Git 提供商**:
+    将您的代码推送到一个 Git 仓库 (例如 GitHub, GitLab, or Bitbucket)。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2.  **从 Vercel 导入项目**:
+    - 访问您的 [Vercel dashboard](https://vercel.com/dashboard)。
+    - 点击 "Add New..." -> "Project"。
+    - 选择 "Continue with Git"。
+    - 从列表中选择您的 Git 仓库。
 
-## Deploy on Vercel
+3.  **配置和部署**:
+    - Vercel 会自动检测到这是一个 Next.js 项目，并为您配置好所有构建设置。
+    - 您无需进行任何更改，直接点击 "Deploy" 即可。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+部署完成后，Vercel 会为您提供一个可公开访问的 URL。您的应用就成功上线了！
