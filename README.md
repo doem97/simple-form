@@ -2,15 +2,13 @@
 
 这是一个简单的客户信息收集和时间段预订应用。用户可以填写他们的信息，选择一个可用的日期/时间段/地点进行预约。
 
-## 🚀 推荐流程：从 Vercel 开始
+## 🚀 推荐流程：一键部署到 Vercel
 
-### 第 1 步：一键部署到 Vercel
-
+1.  **点击这个按钮**:
 <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdoem97%2Fsimple-form" target="_blank" rel="noopener noreferrer">
     <img src="https://vercel.com/button" alt="Deploy with Vercel" />
 </a>
 
-1.  **点击上方黑色的 "Deploy with Vercel" 按钮**。
 2.  **连接 Git 提供商**：Vercel 会提示您创建一个新的 Git 仓库，项目代码会被克隆到这个新仓库中。
 3.  **连接数据库 (关键！)**
     - **注意**: 此时的部署会因为没有连接数据库而 **失败**。这是预期行为。
@@ -30,7 +28,7 @@
 6.  **(可选) 绑定自定义域名**
     - 在项目 "Settings" -> "Domains" 中，您可以将自己的域名绑定到此项目。
 
-### 第 2 步：在本地运行
+## （可选）在本地运行
 
 部署成功后，您可以轻松地将项目和环境变量拉取到本地进行开发。
 
