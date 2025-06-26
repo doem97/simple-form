@@ -2,6 +2,18 @@
 
 这是一个简单的客户信息收集和时间段预订应用。用户可以填写他们的信息，选择一个可用的日期/时间段/地点进行预约。
 
+## ✨ 线上示例
+
+- **示例网站**: [booking.distribrain.com](https://booking.distribrain.com)
+- **示例后台**: [booking.distribrain.com/admin](https://booking.distribrain.com/admin) (密码: `admin`)
+
+<p align="center">
+  <img alt="预定系统截图" src="https://via.placeholder.com/800x600.png?text=Booking+System+UI" width="48%">
+  &nbsp;&nbsp;
+  <img alt="后台系统截图" src="https://via.placeholder.com/800x600.png?text=Admin+Panel+UI" width="48%">
+</p>
+<br/>
+
 ## 🚀 推荐流程：一键部署到 Vercel
 
 1.  **点击这个按钮**:
